@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-// const WebSocket = require('ws');
+const WebSocket = require('ws');
 const WebSocketServer = require('ws').Server;
 
 const bodyParser = require('body-parser');
@@ -15,7 +15,6 @@ const serverConfig = {
 };
 
 const app = express();
-// const ws = new WebSocketServer({ port: 3009 });
 const httpsServer = https.createServer(serverConfig, app);
 const wss = new WebSocketServer({ server: httpsServer });
 
@@ -60,3 +59,6 @@ wss.broadcast = function(data) {
     }
   });
 };
+
+httpsServer.listen(3000);
+module.exports = httpsServer;
